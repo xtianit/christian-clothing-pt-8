@@ -208,16 +208,20 @@
                 height: 100%;
                 background: rgba(0, 0, 0, 0.7);
                 z-index: 1000;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .modal-content {
                 background: white;
-                margin: 15% auto;
+                margin: 10vh auto;
                 padding: 20px;
                 width: 70%;
                 max-width: 700px;
                 border-radius: 10px;
                 position: relative;
+                max-height: 80vh;
+                overflow-y: auto;
             }
 
             .close {
@@ -819,6 +823,11 @@
             .verse-text, .options label {
                 font-size: var(--font-size);
             }
+
+            /* Add to your existing modal styles in the <style> section */
+            body.modal-open {
+                overflow: hidden;
+            }
         </style>
     </head>
     <body>
@@ -1253,6 +1262,7 @@
                 const verseRef = document.getElementById("verse-reference");
                 verseRef.textContent = reference;
                 modal.style.display = "block";
+                document.body.classList.add('modal-open');
                 showVersion(preferredVersion);
             }
 
@@ -1309,7 +1319,7 @@
                     KJV: "1 Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal. 2 And though I have the gift of prophecy, and understand all mysteries, and all knowledge; and though I have all faith, so that I could remove mountains, and have not charity, I am nothing. 3 And though I bestow all my goods to feed the poor, and though I give my body to be burned, and have not charity, it profiteth me nothing.",
                     NKJV: "1 Though I speak with the tongues of men and of angels, but have not love, I have become sounding brass or a clanging cymbal. 2 And though I have the gift of prophecy, and understand all mysteries and all knowledge, and though I have all faith, so that I could remove mountains, but have not love, I am nothing. 3 And though I bestow all my goods to feed the poor, and though I give my body to be burned, but have not love, it profits me nothing.",
                     NIV: "1 If I speak in the tongues of men or of angels, but do not have love, I am only a resounding gong or a clanging cymbal. 2 If I have the gift of prophecy and can fathom all mysteries and all knowledge, and if I have a faith that can move mountains, but do not have love, I am nothing. 3 If I give all I possess to the poor and give over my body to hardship that I may boast, but do not have love, I gain nothing.",
-                    ESV: "1 If I speak in the tongues of men and of angels, but have not love, I am a noisy gong or a clanging cymbal. 2 And if I have prophetic powers, and understand all mysteries and all knowledge, and if I have all faith, so as to remove mountains, but have not love, I am nothing. 3 If I give away all I have, and if I deliver up my body to be burned, but have not love, I gain nothing.",
+                    ESV: "1 If I speak in the tongues of men and of angels, but have not love, I am a noisy gong or a clanging cymbal. 2 And if I have prophetic powers, and understand all mysteries, and [possess] all knowledge; and if I have all faith, so as to remove mountains, but have not love, I am nothing. 3 If I give away all I have, and if I deliver up my body to be burned, but have not love, I gain nothing.",
                     AMP: "1 If I speak with the tongues of men and of angels, but have not love [for others growing out of God's love for me], then I have become only a noisy gong or a clanging cymbal [just an annoying distraction]. 2 And if I have prophetic powers [and speak a new message from God to the people], and understand all mysteries, and [possess] all knowledge; and if I have all [sufficient] faith so that I can remove mountains, but do not have love [reaching out to others], I am nothing. 3 If I give all my possessions to feed the poor, and if I surrender my body to be burned, but do not have love [reaching out to others], it does me no good at all.",
                     NLT: "1 If I could speak all the languages of earth and of angels, but didn't love others, I would only be a noisy gong or a clanging cymbal. 2 If I had the gift of prophecy, and if I understood all of God's secret plans and possessed all knowledge, and if I had such faith that I could move mountains, but didn't love others, I would be nothing. 3 If I gave everything I have to the poor and even sacrificed my body, I could boast about it; but if I didn't love others, I would have gained nothing.",
                 },
@@ -1377,12 +1387,14 @@
             // Close modal when clicking the X or outside
             document.querySelector(".close").onclick = function () {
                 document.getElementById("verse-modal").style.display = "none";
+                document.body.classList.remove('modal-open');
             };
 
             window.onclick = function (event) {
                 const modal = document.getElementById("verse-modal");
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    document.body.classList.remove('modal-open');
                 }
             };
 
@@ -1527,6 +1539,7 @@
                 const verseRef = document.getElementById("verse-reference");
                 verseRef.textContent = reference;
                 modal.style.display = "block";
+                document.body.classList.add('modal-open');
                 showVersion(preferredVersion);
             }
 
