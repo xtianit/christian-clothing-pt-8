@@ -828,6 +828,148 @@
             body.modal-open {
                 overflow: hidden;
             }
+
+            /* Add to your existing <style> section */
+            .reflection-section {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .interactive-cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .reflection-card {
+                background: #fff;
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .reflection-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .love-meter {
+                text-align: center;
+            }
+
+            .rating-container {
+                margin: 1rem 0;
+            }
+
+            .love-slider {
+                width: 100%;
+                height: 10px;
+                -webkit-appearance: none;
+                background: #f0f0f0;
+                border-radius: 5px;
+                outline: none;
+            }
+
+            .love-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .action-items {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .action-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .add-action-btn {
+                margin-top: 1rem;
+                padding: 0.5rem;
+                background: var(--secondary-color);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .reflection-journal {
+                background: #fff;
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .journal-prompts {
+                position: relative;
+            }
+
+            .prompt {
+                display: none;
+            }
+
+            .prompt.active {
+                display: block;
+            }
+
+            .prompt-nav {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .commitment-section {
+                background: #fff;
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .commitment-form {
+                margin-bottom: 1.5rem;
+            }
+
+            .commitment-input {
+                width: 100%;
+                padding: 0.8rem;
+                margin: 0.5rem 0;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .save-commitment {
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 0.8rem 1.5rem;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            /* Dark mode styles */
+            .dark-mode .reflection-card,
+            .dark-mode .reflection-journal,
+            .dark-mode .commitment-section {
+                background: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .commitment-input {
+                background: #34495e;
+                border-color: #486581;
+                color: var(--dark-mode-text);
+            }
         </style>
     </head>
     <body>
@@ -1021,27 +1163,66 @@
             <div id="application" class="tab-content">
                 <h2>Personal Application</h2>
                 <div class="reflection-section">
-                    <h3>Personal Reflection</h3>
-                    <div class="reflection-questions">
-                        <ol>
-                            <li>
-                                How do I demonstrate God's love in my daily
-                                life?
-                            </li>
-                            <li>
-                                In what ways can I improve my expression of love
-                                to others?
-                            </li>
-                            <li>
-                                What barriers prevent me from showing love to
-                                difficult people?
-                            </li>
-                        </ol>
+                    <div class="interactive-cards">
+                        <div class="reflection-card">
+                            <h3>Daily Love Check</h3>
+                            <div class="love-meter">
+                                <p>Rate how well you demonstrated God's love today:</p>
+                                <div class="rating-container">
+                                    <input type="range" min="1" max="10" value="5" class="love-slider" id="loveRating">
+                                    <span class="rating-value">5/10</span>
+                                </div>
+                                <div class="rating-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="reflection-card">
+                            <h3>Love Action Plan</h3>
+                            <div class="action-items">
+                                <div class="action-item">
+                                    <input type="checkbox" id="action1">
+                                    <label for="action1">Show kindness to someone who hurt me</label>
+                                </div>
+                                <div class="action-item">
+                                    <input type="checkbox" id="action2">
+                                    <label for="action2">Help someone in need without expecting return</label>
+                                </div>
+                                <div class="action-item">
+                                    <input type="checkbox" id="action3">
+                                    <label for="action3">Share encouragement with three people</label>
+                                </div>
+                                <button class="add-action-btn">+ Add Custom Action</button>
+                            </div>
+                        </div>
                     </div>
-                    <textarea
-                        class="reflection-notes"
-                        placeholder="Write your reflections here..."
-                    ></textarea>
+
+                    <div class="reflection-journal">
+                        <h3>Reflection Journal</h3>
+                        <div class="journal-prompts">
+                            <div class="prompt active">
+                                <p>How did you demonstrate God's love today?</p>
+                                <textarea class="reflection-input" placeholder="Write your thoughts here..."></textarea>
+                            </div>
+                            <div class="prompt-nav">
+                                <button class="prev-prompt" disabled><i class="fas fa-arrow-left"></i></button>
+                                <span class="prompt-counter">1/3</span>
+                                <button class="next-prompt"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="commitment-section">
+                        <h3>Love Commitment</h3>
+                        <div class="commitment-form">
+                            <p>I commit to showing God's love by:</p>
+                            <input type="text" class="commitment-input" placeholder="Type your commitment here...">
+                            <button class="save-commitment">Make Commitment</button>
+                        </div>
+                        <div class="saved-commitments">
+                            <h4>Previous Commitments</h4>
+                            <ul class="commitment-list"></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1612,6 +1793,121 @@
             document.querySelectorAll('.tab-content, .memory-verse, .reflection-notes').forEach(el => {
                 el.classList.add('adjustable-content');
                 el.style.fontSize = 'calc(1rem * var(--content-scale) / 100)';
+            });
+
+            // Add to your existing <script> section
+            document.addEventListener('DOMContentLoaded', () => {
+                // Love Meter functionality
+                const loveSlider = document.querySelector('.love-slider');
+                const ratingValue = document.querySelector('.rating-value');
+                const ratingFeedback = document.querySelector('.rating-feedback');
+
+                if (loveSlider) {
+                    loveSlider.addEventListener('input', () => {
+                        const value = loveSlider.value;
+                        ratingValue.textContent = `${value}/10`;
+                        
+                        // Update feedback based on rating
+                        const feedback = value >= 8 ? "Excellent! Keep showing God's love!" :
+                                        value >= 6 ? "Good effort! There's room to grow." :
+                                        "Consider ways to show more love tomorrow.";
+                        ratingFeedback.textContent = feedback;
+                    });
+                }
+
+                // Action Items functionality
+                const addActionBtn = document.querySelector('.add-action-btn');
+                if (addActionBtn) {
+                    addActionBtn.addEventListener('click', () => {
+                        const action = prompt('Enter your custom love action:');
+                        if (action) {
+                            const actionItems = document.querySelector('.action-items');
+                            const newAction = document.createElement('div');
+                            newAction.className = 'action-item';
+                            newAction.innerHTML = `
+                                <input type="checkbox" id="action${Date.now()}">
+                                <label for="action${Date.now()}">${action}</label>
+                            `;
+                            actionItems.insertBefore(newAction, addActionBtn);
+                        }
+                    });
+                }
+
+                // Journal Prompts functionality
+                const prompts = [
+                    "How did you demonstrate God's love today?",
+                    "What challenges did you face in showing love?",
+                    "How can you better express God's love tomorrow?"
+                ];
+                let currentPrompt = 0;
+
+                const updatePrompt = () => {
+                    const promptElement = document.querySelector('.prompt p');
+                    const promptCounter = document.querySelector('.prompt-counter');
+                    if (promptElement) {
+                        promptElement.textContent = prompts[currentPrompt];
+                        promptCounter.textContent = `${currentPrompt + 1}/${prompts.length}`;
+                    }
+                };
+
+                const nextPromptBtn = document.querySelector('.next-prompt');
+                const prevPromptBtn = document.querySelector('.prev-prompt');
+
+                if (nextPromptBtn && prevPromptBtn) {
+                    nextPromptBtn.addEventListener('click', () => {
+                        if (currentPrompt < prompts.length - 1) {
+                            currentPrompt++;
+                            updatePrompt();
+                            prevPromptBtn.disabled = false;
+                            if (currentPrompt === prompts.length - 1) {
+                                nextPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+
+                    prevPromptBtn.addEventListener('click', () => {
+                        if (currentPrompt > 0) {
+                            currentPrompt--;
+                            updatePrompt();
+                            nextPromptBtn.disabled = false;
+                            if (currentPrompt === 0) {
+                                prevPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+                }
+
+                // Commitment functionality
+                const saveCommitmentBtn = document.querySelector('.save-commitment');
+                const commitmentInput = document.querySelector('.commitment-input');
+                const commitmentList = document.querySelector('.commitment-list');
+
+                if (saveCommitmentBtn && commitmentInput && commitmentList) {
+                    // Load saved commitments
+                    const savedCommitments = JSON.parse(localStorage.getItem('commitments') || '[]');
+                    savedCommitments.forEach(commitment => {
+                        const li = document.createElement('li');
+                        li.textContent = commitment;
+                        commitmentList.appendChild(li);
+                    });
+
+                    saveCommitmentBtn.addEventListener('click', () => {
+                        const commitment = commitmentInput.value.trim();
+                        if (commitment) {
+                            const li = document.createElement('li');
+                            li.textContent = commitment;
+                            commitmentList.appendChild(li);
+
+                            // Save to localStorage
+                            const commitments = JSON.parse(localStorage.getItem('commitments') || '[]');
+                            commitments.push(commitment);
+                            localStorage.setItem('commitments', JSON.stringify(commitments));
+
+                            commitmentInput.value = '';
+                            showToast('Commitment saved! 🙏');
+                        }
+                    });
+                }
             });
         </script>
     </body>
