@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Real Christian Clothing - Part 8</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            /* Loading Animation */
+            .loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            .loader-content {
+                text-align: center;
+                animation: pulse 1.5s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            /* Main Styles */
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #2ecc71;
+                --dark-mode-bg: #2c3e50;
+                --dark-mode-text: #ecf0f1;
+                --font-scale: 100%;
+                --font-size: 16px;
+            }
+
+            body {
+                margin: 0;
+                font-family: "Segoe UI", sans-serif;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            body.dark-mode {
+                background-color: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            /* Tab Navigation */
+            .tabs {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                background: #f8f9fa;
+                border-radius: 10px;
+                padding: 10px;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                scrollbar-width: none; /* Hide scrollbar Firefox */
+                -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+            }
+
+            /* Hide scrollbar for Chrome/Safari */
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                border: none;
+                background: none;
+                cursor: pointer;
+                font-size: 16px;
+                white-space: nowrap;
+                transition: all 0.3s;
+                flex: 0 0 auto; /* Prevent buttons from shrinking */
+                margin: 0 5px;
+            }
+
+            .tab-btn:first-child {
+                margin-left: 0;
+            }
+
+            .tab-btn:last-child {
+                margin-right: 0;
+            }
+
+            .tab-btn.active {
+                background: var(--primary-color);
+                color: white;
+                border-radius: 5px;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .container {
+                    padding: 15px;
+                }
+
+                .tabs {
+                    padding: 8px;
+                    margin-bottom: 15px;
+                }
+
+                .tab-btn {
+                    padding: 8px 16px;
+                    font-size: 14px;
+                }
+
+                /* Improve touch targets */
+                .tab-btn {
+                    min-height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            /* Add subtle indicators for scroll */
+            .tabs::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 30px;
+                background: linear-gradient(
+                    to right,
+                    transparent,
+                    rgba(248, 249, 250, 0.9)
+                );
+                pointer-events: none;
+            }
+
+            .dark-mode .tabs::after {
+                background: linear-gradient(
+                    to right,
+                    transparent,
+                    rgba(52, 73, 94, 0.9)
+                );
+            }
+
+            /* Content Sections */
+            .tab-content {
+                display: none;
+                padding: 20px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .tab-content.active {
+                display: block;
+                animation: fadeIn 0.5s;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            /* Theme Toggle */
+            .theme-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px;
+                border-radius: 50%;
+                border: none;
+                background: var(--primary-color);
+                color: white;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            /* Modal Styles */
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 1000;
+            }
+
+            .modal-content {
+                background: white;
+                margin: 15% auto;
+                padding: 20px;
+                width: 70%;
+                max-width: 700px;
+                border-radius: 10px;
+                position: relative;
+            }
+
+            .close {
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 28px;
+                cursor: pointer;
+            }
+
+            /* Verse Button Styles */
+            .verse-btn {
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 10px 0;
+                transition: background 0.3s;
+            }
+
+            .verse-btn:hover {
+                background: #2980b9;
+            }
+
+            /* Quiz Styles */
+            .quiz-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .question {
+                margin-bottom: 20px;
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 5px;
+            }
+
+            .options label {
+                display: block;
+                margin: 10px 0;
+                cursor: pointer;
+            }
+
+            .quiz-submit {
+                background: var(--secondary-color);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+
+            /* Reflection Styles */
+            .reflection-notes {
+                width: 100%;
+                min-height: 150px;
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                resize: vertical;
+            }
+
+            /* Prayer Points Styles */
+            .prayer-points ol {
+                padding-left: 20px;
+            }
+
+            .prayer-points li {
+                margin-bottom: 15px;
+                line-height: 1.6;
+            }
+
+            /* Add to your existing style section */
+            .verse-text {
+                font-size: 1.1em;
+                line-height: 1.6;
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 5px;
+                margin: 15px 0;
+            }
+
+            .dark-mode .verse-text {
+                background: #34495e;
+            }
+
+            /* Add inside your existing <style> tag, after the existing dark mode styles */
+
+            /* Dark Mode Styles */
+            .dark-mode {
+                background-color: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .tab-content {
+                background: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .tabs {
+                background: #34495e;
+            }
+
+            .dark-mode .question {
+                background: #34495e;
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .modal-content {
+                background: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .reflection-notes {
+                background: #34495e;
+                color: var(--dark-mode-text);
+                border-color: #486581;
+            }
+
+            .dark-mode .verse-btn {
+                background: #2980b9;
+            }
+
+            .dark-mode .verse-btn:hover {
+                background: #3498db;
+            }
+
+            .dark-mode .close {
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .version-btn {
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .version-btn.active {
+                background: #2980b9;
+            }
+
+            .dark-mode .quiz-submit {
+                background: #27ae60;
+            }
+
+            .dark-mode .quiz-submit:hover {
+                background: #2ecc71;
+            }
+
+            /* Add to the existing <style> section */
+            .progress-container {
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 100%;
+                height: 10px;
+                background: #eee;
+                border-radius: 5px;
+                margin: 10px 0;
+                overflow: hidden;
+            }
+
+            .progress {
+                width: 0%;
+                height: 100%;
+                background: var(--primary-color);
+                transition: width 0.5s ease-in-out;
+            }
+
+            .progress-text {
+                font-size: 14px;
+                color: #666;
+            }
+
+            /* Interactive Elements */
+            .interactive-element {
+                transform: scale(1);
+                transition: transform 0.2s;
+            }
+
+            .interactive-element:hover {
+                transform: scale(1.02);
+            }
+
+            /* Floating Action Button */
+            .fab {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: var(--secondary-color);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .fab:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Toast Notification */
+            .toast {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                opacity: 0;
+                transition: opacity 0.3s;
+                z-index: 1000;
+            }
+
+            /* Add animation classes */
+            .question-container {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s;
+            }
+
+            .question-container.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .dark-mode .toast {
+                background: #ecf0f1;
+                color: #2c3e50;
+            }
+
+            // Add to your existing style section
+            .scripture-list li {
+                margin-bottom: 1.5em;
+                line-height: 1.6;
+            }
+
+            .verse-buttons {
+                margin-top: 0.5em;
+                display: flex;
+                gap: 0.5em;
+                flex-wrap: wrap;
+            }
+
+            .verse-buttons .verse-btn {
+                font-size: 0.9em;
+                padding: 6px 12px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 15px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .verse-buttons .verse-btn:hover {
+                background: #2980b9;
+                transform: translateY(-2px);
+            }
+
+            .dark-mode .verse-buttons .verse-btn {
+                background: #34495e;
+            }
+
+            .dark-mode .verse-buttons .verse-btn:hover {
+                background: #2c3e50;
+            }
+
+            @media (max-width: 768px) {
+                .verse-buttons {
+                    flex-direction: row;
+                }
+
+                .verse-buttons .verse-btn {
+                    font-size: 0.8em;
+                    padding: 8px 16px;
+                }
+            }
+
+            // Add to your existing style section
+
+            .version-tab {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 15px;
+                overflow-x: auto;
+                padding: 5px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .version-tab::-webkit-scrollbar {
+                display: none;
+            }
+
+            .version-btn {
+                padding: 8px 16px;
+                border: none;
+                background: #f8f9fa;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+                flex: 0 0 auto;
+                font-weight: 500;
+            }
+
+            .version-btn.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            /* Add scroll indicator */
+            .version-tab::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 30px;
+                background: linear-gradient(
+                    to right,
+                    transparent,
+                    rgba(255, 255, 255, 0.9)
+                );
+                pointer-events: none;
+            }
+
+            .dark-mode .version-tab::after {
+                background: linear-gradient(
+                    to right,
+                    transparent,
+                    rgba(44, 62, 80, 0.9)
+                );
+            }
+
+            @media (max-width: 768px) {
+                .version-btn {
+                    padding: 8px 14px;
+                    font-size: 14px;
+                }
+            }
+
+            // Add to your existing <style> section
+
+            .verse-loader {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .verse-loader i {
+                animation: rotate 1s infinite linear;
+                color: var(--primary-color);
+            }
+
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .verse-text {
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            } /* Update the version button styles */
+            .version-btn {
+                padding: 8px 16px;
+                border: none;
+                background: #f8f9fa;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+                flex: 0 0 auto;
+                font-weight: 500;
+                color: #333;
+            }
+
+            .version-btn.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            /* Add dark mode styles for version buttons */
+            .dark-mode .version-btn {
+                background: #34495e;
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .version-btn:hover {
+                background: #2c3e50;
+            }
+
+            .dark-mode .version-btn.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            /* Update modal content background in dark mode */
+            .dark-mode .version-tab {
+                background: transparent;
+            } /* Update the version button styles */
+            .version-btn {
+                padding: 8px 16px;
+                border: none;
+                background: #f8f9fa;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+                flex: 0 0 auto;
+                font-weight: 500;
+                color: #333;
+            }
+
+            .version-btn.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            /* Add dark mode styles for version buttons */
+            .dark-mode .version-btn {
+                background: #34495e;
+                color: var(--dark-mode-text);
+            }
+
+            .dark-mode .version-btn:hover {
+                background: #2c3e50;
+            }
+
+            .dark-mode .version-btn.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            /* Update modal content background in dark mode */
+            .dark-mode .version-tab {
+                background: transparent;
+            }
+
+            .verse-text.show {
+                opacity: 1;
+            }
+
+            /* Add these styles to your existing <style> section */
+            .theme-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 60px;
+                height: 30px;
+                border-radius: 15px;
+                background: #485460;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                padding: 0 5px;
+                box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            }
+
+            .theme-toggle::before {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                background: #fff;
+                border-radius: 50%;
+                left: 3px;
+                transition: all 0.3s ease;
+            }
+
+            .theme-toggle i {
+                position: absolute;
+                right: 8px;
+                color: #fff;
+                font-size: 14px;
+                transition: all 0.3s ease;
+            }
+
+            /* Dark mode styles for the switch */
+            body.dark-mode .theme-toggle {
+                background: var(--primary-color);
+            }
+
+            body.dark-mode .theme-toggle::before {
+                left: 33px;
+                background: #fff;
+            }
+
+            body.dark-mode .theme-toggle i {
+                right: auto;
+                left: 8px;
+                color: #fff;
+            }
+
+            /* Add these styles to your existing <style> section */
+            .font-controls {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                background: white;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                display: flex;
+                gap: 10px;
+                z-index: 1000;
+            }
+
+            .font-controls button {
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .font-controls button:hover {
+                background: #2980b9;
+                transform: translateY(-2px);
+            }
+
+            .font-controls .font-size {
+                display: inline-block;
+                min-width: 30px;
+                text-align: center;
+            }
+
+            /* Adjustable content styles */
+            .adjustable-content {
+                transition: all 0.3s ease;
+            }
+
+            /* Dark mode styles */
+            .dark-mode .font-controls {
+                background: var(--dark-mode-bg);
+                color: var(--dark-mode-text);
+            }
+
+            /* Font family options */
+            .font-family-select {
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                background: white;
+                color: #333;
+            }
+
+            .dark-mode .font-family-select {
+                background: #34495e;
+                color: var(--dark-mode-text);
+                border-color: #486581;
+            }
+
+            /* Update or add these styles in your <style> section */
+
+            .adjustable-content {
+                font-size: calc(1em * var(--font-scale) / 100);
+                transition: font-size 0.3s ease;
+            }
+
+            /* Make all text content adjustable */
+            p, h1, h2, h3, h4, h5, h6, li, blockquote, label, button, input, textarea {
+                font-size: calc(1em * var(--font-scale) / 100);
+                transition: font-size 0.3s ease;
+            }
+
+            /* Add these styles for text scaling */
+            .scalable-text {
+                font-size: var(--font-size);
+                transition: font-size 0.3s ease;
+            }
+
+            /* Apply scalable text to all text elements */
+            p, h1, h2, h3, h4, h5, h6, li, blockquote, 
+            label, button, input, textarea, .tab-btn, 
+            .verse-text, .options label {
+                font-size: var(--font-size);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Loading Screen -->
+        <div class="loader">
+            <div class="loader-content">
+                <i class="fas fa-cross fa-3x"></i>
+                <h2>Loading Sunday School Lesson...</h2>
+            </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="container">
+            <h1>The Real Christian Clothings - Part 8</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="lessonProgress"></div>
+                </div>
+                <span class="progress-text">0% Complete</span>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('intro')">
+                    Introduction
+                </button>
+                <button class="tab-btn" onclick="openTab('lesson')">
+                    Lesson
+                </button>
+                <button class="tab-btn" onclick="openTab('application')">
+                    Application
+                </button>
+                <button class="tab-btn" onclick="openTab('quiz')">Quiz</button>
+                <button class="tab-btn" onclick="openTab('prayer')">
+                    Prayer Points
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="intro" class="tab-content active">
+                <h2>Introduction</h2>
+                <p>
+                    In the previous lesson on this topic, a lot has been
+                    revealed, required and desired but in all love is highly
+                    placed above them. Since man is profit oriented like God, he
+                    is expected to place more value on love. It is the reason
+                    for creation, salvation, restoration and our existence.
+                </p>
+
+                <div class="memory-verse">
+                    <h3>Memory Verse</h3>
+                    <blockquote>
+                        "A new commandment I give unto you, that ye love one
+                        another; as I have loved you, that ye also love one
+                        another" - John 13:34
+                        <button
+                            onclick="showBibleVersions('John 13:34')"
+                            class="verse-btn"
+                        >
+                            Read in Different Versions
+                        </button>
+                    </blockquote>
+                </div>
+
+                <div class="aims-objectives">
+                    <h3>Aims and Objectives</h3>
+                    <p>
+                        <strong>Aim:</strong> To draw the attention of
+                        Christians to the need for change of character.
+                    </p>
+                    <p>
+                        <strong>Objective:</strong> That the child of God may be
+                        known by deeds and not by words.
+                    </p>
+                </div>
+            </div>
+
+            <div id="lesson" class="tab-content">
+                <h2>Lesson Content</h2>
+                <div class="main-text">
+                    <h3>Text: Colossians 3:12-14</h3>
+                    <button
+                        onclick="showBibleVersions('Colossians 3:12-14')"
+                        class="verse-btn"
+                    >
+                        Read Passage
+                    </button>
+                </div>
+
+                <div class="lesson-section">
+                    <h3>Bowels of Love</h3>
+                    <p>
+                        Love is the affectionate feeling that motivates one to
+                        favor another and to do something beneficial. Love is
+                        the ultimate virtue that is responsible for salvation
+                        and Christian labour. This attire is to be put on as a
+                        garment on the spirit of the man as a finishing touch of
+                        a well-dressed Christian. Love is the embodiment of the
+                        other virtues and it's responsible for perfection.
+                    </p>
+
+                    <h3>Why Love is Necessary?</h3>
+                    <ol class="scripture-list">
+                        <li>
+                            Love is responsible for gifts
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('John 3:16')"
+                                    class="verse-btn"
+                                >
+                                    John 3:16
+                                </button>
+                                <button
+                                    onclick="showBibleVersions('Romans 5:8')"
+                                    class="verse-btn"
+                                >
+                                    Romans 5:8
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            Love covers sin
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Proverbs 10:12')"
+                                    class="verse-btn"
+                                >
+                                    Proverbs 10:12
+                                </button>
+                                <button
+                                    onclick="showBibleVersions('Proverbs 17:9')"
+                                    class="verse-btn"
+                                >
+                                    Proverbs 17:9
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            If you love God you will serve him as necessary
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Matthew 22:39')"
+                                    class="verse-btn"
+                                >
+                                    Matthew 22:39
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            If you love your neighbour as yourself, you will
+                            consider him
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Matthew 22:39-40')"
+                                    class="verse-btn"
+                                >
+                                    Matthew 22:39-40
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            It is a proof of your sonship to God
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('1 John 4:7')"
+                                    class="verse-btn"
+                                >
+                                    1 John 4:7
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            Without love, every other thing amounts to nothing
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('1 Corinthians 13:1-3')"
+                                    class="verse-btn"
+                                >
+                                    1 Corinthians 13:1-3
+                                </button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="application" class="tab-content">
+                <h2>Personal Application</h2>
+                <div class="reflection-section">
+                    <h3>Personal Reflection</h3>
+                    <div class="reflection-questions">
+                        <ol>
+                            <li>
+                                How do I demonstrate God's love in my daily
+                                life?
+                            </li>
+                            <li>
+                                In what ways can I improve my expression of love
+                                to others?
+                            </li>
+                            <li>
+                                What barriers prevent me from showing love to
+                                difficult people?
+                            </li>
+                        </ol>
+                    </div>
+                    <textarea
+                        class="reflection-notes"
+                        placeholder="Write your reflections here..."
+                    ></textarea>
+                </div>
+            </div>
+
+            <div id="quiz" class="tab-content">
+                <h2>Knowledge Check</h2>
+                <div class="quiz-container">
+                    <div id="quiz-questions">
+                        <div class="question">
+                            <p>1. What is the memory verse for this lesson?</p>
+                            <div class="options">
+                                <label
+                                    ><input type="radio" name="q1" value="a" />
+                                    Matthew 22:39</label
+                                >
+                                <label
+                                    ><input type="radio" name="q1" value="b" />
+                                    John 13:34</label
+                                >
+                                <label
+                                    ><input type="radio" name="q1" value="c" />
+                                    1 John 4:7</label
+                                >
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <p>
+                                2. Why is love necessary according to the
+                                lesson?
+                            </p>
+                            <div class="options">
+                                <label
+                                    ><input type="radio" name="q2" value="a" />
+                                    It brings material prosperity</label
+                                >
+                                <label
+                                    ><input type="radio" name="q2" value="b" />
+                                    It is responsible for gifts and covers
+                                    sin</label
+                                >
+                                <label
+                                    ><input type="radio" name="q2" value="c" />
+                                    It makes us popular</label
+                                >
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <p>
+                                3. What does it mean that love is the "bowels of
+                                mercy"?
+                            </p>
+                            <div class="options">
+                                <label
+                                    ><input type="radio" name="q3" value="a" />
+                                    It means love is weak</label
+                                >
+                                <label
+                                    ><input type="radio" name="q3" value="b" />
+                                    It means love is temporary</label
+                                >
+                                <label
+                                    ><input type="radio" name="q3" value="c" />
+                                    It means love is the deepest expression of
+                                    compassion</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="checkQuiz()" class="quiz-submit">
+                        Submit Answers
+                    </button>
+                    <div id="quiz-results"></div>
+                </div>
+            </div>
+
+            <div id="prayer" class="tab-content">
+                <h2>Prayer Points</h2>
+                <div class="prayer-points">
+                    <ol>
+                        <li>Father, help me to love like You love</li>
+                        <li>
+                            Lord, remove every barrier to loving others in my
+                            heart
+                        </li>
+                        <li>
+                            Help me to demonstrate practical love to those
+                            around me
+                        </li>
+                        <li>
+                            Give me the grace to love even when it's difficult
+                        </li>
+                        <li>Let Your love flow through me to touch others</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Add this modal for Bible versions -->
+            <div id="verse-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="verse-reference"></h2>
+                    <div class="version-tab">
+                        <button
+                            class="version-btn active"
+                            onclick="showVersion('KJV')"
+                        >
+                            KJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NKJV')"
+                        >
+                            NKJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NIV')"
+                        >
+                            NIV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('ESV')"
+                        >
+                            ESV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('AMP')"
+                        >
+                            AMP
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NLT')"
+                        >
+                            NLT
+                        </button>
+                    </div>
+                    <div id="verse-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fab" onclick="toggleQuickNav()">
+            <i class="fas fa-compass"></i>
+        </div>
+
+        <div class="quick-nav" id="quickNav">
+            <button onclick="scrollToTop()">
+                <i class="fas fa-arrow-up"></i> Top
+            </button>
+            <button onclick="saveProgress()">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <button onclick="shareLesson()">
+                <i class="fas fa-share"></i> Share
+            </button>
+        </div>
+
+        <!-- Replace your existing font controls with this -->
+        <div class="font-controls">
+            <button onclick="adjustFontSize(-1)" aria-label="Decrease font size">
+                <i class="fas fa-minus"></i>
+            </button>
+            <span class="font-size">16px</span>
+            <button onclick="adjustFontSize(1)" aria-label="Increase font size">
+                <i class="fas fa-plus"></i>
+            </button>
+            <select class="font-family-select" onchange="changeFont(this.value)">
+                <option value="'Segoe UI', sans-serif">Default</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+            </select>
+        </div>
+
+        <script>
+            // Loading Screen
+            window.addEventListener("load", function () {
+                setTimeout(() => {
+                    document.querySelector(".loader").style.display = "none";
+                }, 2000);
+            });
+
+            // Tab Functionality
+            function openTab(tabName) {
+                const tabContents =
+                    document.getElementsByClassName("tab-content");
+                const tabButtons = document.getElementsByClassName("tab-btn");
+
+                for (let content of tabContents) {
+                    content.classList.remove("active");
+                }
+
+                for (let button of tabButtons) {
+                    button.classList.remove("active");
+                }
+
+                document.getElementById(tabName).classList.add("active");
+                event.currentTarget.classList.add("active");
+            }
+
+            // Theme Toggle
+            function toggleTheme() {
+                document.body.classList.toggle("dark-mode");
+                const icon = document.querySelector(".theme-toggle i");
+                icon.classList.toggle("fa-moon");
+                icon.classList.toggle("fa-sun");
+            }
+
+            // Add these functions to your existing JavaScript
+
+            function showBibleVersions(reference) {
+                const modal = document.getElementById("verse-modal");
+                const verseRef = document.getElementById("verse-reference");
+                verseRef.textContent = reference;
+                modal.style.display = "block";
+                showVersion(preferredVersion);
+            }
+
+            const bibleVerses = {
+                "John 13:34": {
+                    KJV: "34 A new commandment I give unto you, That ye love one another; as I have loved you, that ye also love one another.",
+                    NKJV: "34 A new commandment I give to you, that you love one another; as I have loved you, that you also love one another.",
+                    NIV: "34 A new command I give you: Love one another. As I have loved you, so you must love one another.",
+                    ESV: "34 A new commandment I give to you, that you love one another: just as I have loved you, you also are to love one another.",
+                    AMP: "34 I give you a new commandment: that you should love one another. Just as I have loved you, so you too should love one another.",
+                    NLT: "34 So now I am giving you a new commandment: Love each other. Just as I have loved you, you should love each other.",
+                },
+                "Colossians 3:12-14": {
+                    KJV: "12 Put on therefore, as the elect of God, holy and beloved, bowels of mercies, kindness, humbleness of mind, meekness, longsuffering; 13 Forbearing one another, and forgiving one another, if any man have a quarrel against any: even as Christ forgave you, so also do ye. 14 And above all these things put on charity, which is the bond of perfectness.",
+                    NKJV: "12 Therefore, as the elect of God, holy and beloved, put on tender mercies, kindness, humility, meekness, longsuffering; 13 bearing with one another, and forgiving one another, if anyone has a complaint against another; even as Christ forgave you, so you also must do. 14 But above all these things put on love, which is the bond of perfection.",
+                    NIV: "12 Therefore, as God's chosen people, holy and dearly loved, clothe yourselves with compassion, kindness, humility, gentleness and patience. 13 Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you. 14 And over all these virtues put on love, which binds them all together in perfect unity.",
+                    ESV: "12 Put on then, as God's chosen ones, holy and beloved, compassionate hearts, kindness, humility, meekness, and patience, 13 bearing with one another and, if one has a complaint against another, forgiving each other; as the Lord has forgiven you, so you also must forgive. 14 And above all these put on love, which binds everything together in perfect harmony.",
+                    AMP: "12 So, as God's own chosen people, who are holy [set apart, sanctified for His purpose] and well-beloved [by God Himself], put on a heart of compassion, kindness, humility, gentleness, and patience [which has the power to endure whatever injustice or unpleasantness comes, with good temper]; 13 bearing graciously with one another, and willingly forgiving each other if one has a cause for complaint against another; just as the Lord has forgiven you, so should you forgive. 14 Beyond all these things put on and wrap yourselves in [unselfish] love, which is the perfect bond of unity [for everything is bound together in agreement when each one seeks the best for others].",
+                    NLT: "12 Since God chose you to be the holy people he loves, you must clothe yourselves with tenderhearted mercy, kindness, humility, gentleness, and patience. 13 Make allowance for each other's faults, and forgive anyone who offends you. Remember, the Lord forgave you, so you must forgive others. 14 Above all, clothe yourselves with love, which binds us all together in perfect harmony.",
+                },
+                "Romans 5:8": {
+                    KJV: "8 But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us.",
+                    NKJV: "8 But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.",
+                    NIV: "8 But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.",
+                    ESV: "8 But God shows his love for us in that while we were still sinners, Christ died for us.",
+                    AMP: "8 But God clearly shows and proves His own love for us, by the fact that while we were still sinners, Christ died for us.",
+                    NLT: "8 But God showed his great love for us by sending Christ to die for us while we were still sinners.",
+                },
+                "Proverbs 10:12": {
+                    KJV: "12 Hatred stirreth up strifes: but love covereth all sins.",
+                    NKJV: "12 Hatred stirs up strife, But love covers all sins.",
+                    NIV: "12 Hatred stirs up conflict, but love covers over all wrongs.",
+                    ESV: "12 Hatred stirs up strife, but love covers all offenses.",
+                    AMP: "12 Hatred stirs up strife, But love covers and overwhelms all transgressions [forgiving and overlooking another's faults].",
+                    NLT: "12 Hatred stirs up quarrels, but love makes up for all offenses.",
+                },
+                "Proverbs 17:9": {
+                    KJV: "9 He that covereth a transgression seeketh love; but he that repeateth a matter separateth very friends.",
+                    NKJV: "9 He who covers a transgression seeks love, But he who repeats a matter separates friends.",
+                    NIV: "9 Whoever would foster love covers over an offense, but whoever repeats the matter separates close friends.",
+                    ESV: "9 Whoever covers an offense seeks love, but he who repeats a matter separates close friends.",
+                    AMP: "9 He who covers and forgives an offense seeks love, But he who repeats or gossips about a matter separates intimate friends.",
+                    NLT: "9 Love prospers when a fault is forgiven, but dwelling on it separates close friends.",
+                },
+                "1 John 4:7": {
+                    KJV: "7 Beloved, let us love one another: for love is of God; and every one that loveth is born of God, and knoweth God.",
+                    NKJV: "7 Beloved, let us love one another, for love is of God; and everyone who loves is born of God and knows God.",
+                    NIV: "7 Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God.",
+                    ESV: "7 Beloved, let us love one another, for love is from God, and whoever loves has been born of God and knows God.",
+                    AMP: "7 Beloved, let us [unselfishly] love and seek the best for one another, for love is from God; and everyone who loves [others] is born of God and knows God [through personal experience].",
+                    NLT: "7 Dear friends, let us continue to love one another, for love comes from God. Anyone who loves is a child of God and knows God.",
+                },
+                "1 Corinthians 13:1-3": {
+                    KJV: "1 Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal. 2 And though I have the gift of prophecy, and understand all mysteries, and all knowledge; and though I have all faith, so that I could remove mountains, and have not charity, I am nothing. 3 And though I bestow all my goods to feed the poor, and though I give my body to be burned, and have not charity, it profiteth me nothing.",
+                    NKJV: "1 Though I speak with the tongues of men and of angels, but have not love, I have become sounding brass or a clanging cymbal. 2 And though I have the gift of prophecy, and understand all mysteries and all knowledge, and though I have all faith, so that I could remove mountains, but have not love, I am nothing. 3 And though I bestow all my goods to feed the poor, and though I give my body to be burned, but have not love, it profits me nothing.",
+                    NIV: "1 If I speak in the tongues of men or of angels, but do not have love, I am only a resounding gong or a clanging cymbal. 2 If I have the gift of prophecy and can fathom all mysteries and all knowledge, and if I have a faith that can move mountains, but do not have love, I am nothing. 3 If I give all I possess to the poor and give over my body to hardship that I may boast, but do not have love, I gain nothing.",
+                    ESV: "1 If I speak in the tongues of men and of angels, but have not love, I am a noisy gong or a clanging cymbal. 2 And if I have prophetic powers, and understand all mysteries and all knowledge, and if I have all faith, so as to remove mountains, but have not love, I am nothing. 3 If I give away all I have, and if I deliver up my body to be burned, but have not love, I gain nothing.",
+                    AMP: "1 If I speak with the tongues of men and of angels, but have not love [for others growing out of God's love for me], then I have become only a noisy gong or a clanging cymbal [just an annoying distraction]. 2 And if I have prophetic powers [and speak a new message from God to the people], and understand all mysteries, and [possess] all knowledge; and if I have all [sufficient] faith so that I can remove mountains, but do not have love [reaching out to others], I am nothing. 3 If I give all my possessions to feed the poor, and if I surrender my body to be burned, but do not have love [reaching out to others], it does me no good at all.",
+                    NLT: "1 If I could speak all the languages of earth and of angels, but didn't love others, I would only be a noisy gong or a clanging cymbal. 2 If I had the gift of prophecy, and if I understood all of God's secret plans and possessed all knowledge, and if I had such faith that I could move mountains, but didn't love others, I would be nothing. 3 If I gave everything I have to the poor and even sacrificed my body, I could boast about it; but if I didn't love others, I would have gained nothing.",
+                },
+                "John 3:16": {
+                    KJV: "16 For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+                    NKJV: "16 For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life.",
+                    NIV: "16 For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+                    ESV: "16 For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.",
+                    AMP: "16 For God so [greatly] loved and dearly prized the world, that He [even] gave His [One and] only begotten Son, so that whoever believes and trusts in Him [as Savior] shall not perish, but have eternal life.",
+                    NLT: "16 For God loved the world so much that he gave his one and only Son, so that everyone who believes in him will not perish but have eternal life.",
+                },
+                "Matthew 22:39-40": {
+                    KJV: "39 And the second is like unto it, Thou shalt love thy neighbour as thyself. 40 On these two commandments hang all the law and the prophets.",
+                    NKJV: "39 And the second is like it: 'You shall love your neighbor as yourself.' 40 On these two commandments hang all the Law and the Prophets.",
+                    NIV: "39 And the second is like it: 'Love your neighbor as yourself.' 40 All the Law and the Prophets hang on these two commandments.",
+                    ESV: "39 And a second is like it: You shall love your neighbor as yourself. 40 On these two commandments depend all the Law and the Prophets.",
+                    AMP: "39 The second is like it, 'You shall love your neighbor as yourself [that is, unselfishly seek the best or higher good for others].' 40 The whole Law and the [writings of the] Prophets depend on these two commandments.",
+                    NLT: "39 A second is equally important: 'Love your neighbor as yourself.' 40 The entire law and all the demands of the prophets are based on these two commandments.",
+                },
+                "Matthew 22:39": {
+                    KJV: "39 And the second is like unto it, Thou shalt love thy neighbour as thyself.",
+                    NKJV: "39 And the second is like it: 'You shall love your neighbor as yourself.'",
+                    NIV: "39 And the second is like it: 'Love your neighbor as yourself.'",
+                    ESV: "39 And a second is like it: You shall love your neighbor as yourself.",
+                    AMP: "39 The second is like it, 'You shall love your neighbor as yourself [that is, unselfishly seek the best or higher good for others].'",
+                    NLT: "39 A second is equally important: 'Love your neighbor as yourself.'",
+                },
+            };
+
+            // Replace the existing showVersion function
+
+            function showVersion(version) {
+                const reference =
+                    document.getElementById("verse-reference").textContent;
+                const verseText = document.getElementById("verse-text");
+
+                // Show loader
+                verseText.innerHTML =
+                    '<div class="verse-loader"><i class="fas fa-spinner fa-2x"></i></div>';
+
+                // Simulate loading time and show verse
+                setTimeout(() => {
+                    if (bibleVerses[reference]) {
+                        verseText.innerHTML = `<p class="verse-text">${bibleVerses[reference][version]}</p>`;
+                        // Add show class after a brief delay to trigger fade-in
+                        setTimeout(() => {
+                            document
+                                .querySelector(".verse-text")
+                                .classList.add("show");
+                        }, 50);
+                    } else {
+                        verseText.innerHTML =
+                            "<p>Verse not found in database.</p>";
+                    }
+
+                    // Update active button
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === version)
+                            btn.classList.add("active");
+                    });
+                }, 500); // Half second loading time
+            }
+
+            // Close modal when clicking the X or outside
+            document.querySelector(".close").onclick = function () {
+                document.getElementById("verse-modal").style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                const modal = document.getElementById("verse-modal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            function checkQuiz() {
+                const answers = {
+                    q1: "b",
+                    q2: "b",
+                    q3: "c",
+                };
+
+                let score = 0;
+                let total = Object.keys(answers).length;
+
+                for (let question in answers) {
+                    const selected = document.querySelector(
+                        `input[name="${question}"]:checked`
+                    );
+                    if (selected && selected.value === answers[question])
+                        score++;
+                }
+
+                const results = document.getElementById("quiz-results");
+                results.innerHTML = `
+                <h3>Quiz Results</h3>
+                <p>You scored ${score} out of ${total}</p>
+                ${
+                    score === total
+                        ? "<p>Excellent! Perfect score!</p>"
+                        : "<p>Keep studying and try again!</p>"
+                }
+            `;
+            }
+
+            // Add to your existing <script> section
+            // Track progress
+            let progress = 0;
+            const totalSections = 5; // Number of tabs
+
+            function updateProgress(increment = true) {
+                if (increment) {
+                    progress = Math.min(100, progress + 100 / totalSections);
+                }
+                const progressBar = document.querySelector(".progress");
+                const progressText = document.querySelector(".progress-text");
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${Math.round(progress)}% Complete`;
+
+                if (progress >= 100) {
+                    showToast(
+                        "Congratulations! You've completed the lesson! 🎉"
+                    );
+                }
+            }
+
+            function showToast(message) {
+                const toast = document.createElement("div");
+                toast.className = "toast";
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Trigger reflow
+                toast.offsetHeight;
+
+                // Show toast
+                toast.style.opacity = "1";
+
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // Add interaction tracking to tab switching
+            const originalOpenTab = openTab;
+            openTab = function (tabName) {
+                originalOpenTab(tabName);
+                updateProgress();
+
+                // Add animation to questions
+                if (tabName === "quiz") {
+                    document.querySelectorAll(".question").forEach((q, i) => {
+                        setTimeout(() => q.classList.add("show"), i * 200);
+                    });
+                }
+            };
+
+            // Save progress to localStorage
+            function saveProgress() {
+                localStorage.setItem("lessonProgress", progress);
+                showToast("Progress saved! 💾");
+            }
+
+            // Load saved progress
+            window.addEventListener("load", () => {
+                const savedProgress = localStorage.getItem("lessonProgress");
+                if (savedProgress) {
+                    progress = parseFloat(savedProgress);
+                    updateProgress(false);
+                }
+            });
+
+            // Share functionality
+            function shareLesson() {
+                if (navigator.share) {
+                    navigator
+                        .share({
+                            title: "Sunday School Lesson",
+                            text: "Check out this lesson on Real Christian Clothing!",
+                            url: window.location.href,
+                        })
+                        .then(() => showToast("Shared successfully! 🙌"))
+                        .catch(() => showToast("Sharing failed"));
+                } else {
+                    showToast("Sharing not supported on this device");
+                }
+            }
+
+            // Scroll to top
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }
+
+            // Add to your existing JavaScript
+
+            let preferredVersion =
+                localStorage.getItem("preferredVersion") || "KJV";
+
+            function changeDefaultVersion(version) {
+                preferredVersion = version;
+                localStorage.setItem("preferredVersion", version);
+                showVersion(version);
+                showToast(`Default Bible version changed to ${version}`);
+            }
+
+            // Update the showBibleVersions function
+            function showBibleVersions(reference) {
+                const modal = document.getElementById("verse-modal");
+                const verseRef = document.getElementById("verse-reference");
+                verseRef.textContent = reference;
+                modal.style.display = "block";
+                showVersion(preferredVersion);
+            }
+
+            // Load preferred version on startup
+            window.addEventListener("load", () => {
+                const savedVersion = localStorage.getItem("preferredVersion");
+                if (savedVersion) {
+                    preferredVersion = savedVersion;
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === preferredVersion)
+                            btn.classList.add("active");
+                    });
+                }
+            });
+
+            // Add this to your existing <script> section
+            let currentFontSize = parseInt(localStorage.getItem('preferredFontSize')) || 16;
+
+            function adjustFontSize(delta) {
+                // Adjust font size with limits
+                currentFontSize = Math.min(Math.max(currentFontSize + delta, 12), 24);
+                
+                // Update CSS variable
+                document.documentElement.style.setProperty('--font-size', `${currentFontSize}px`);
+                
+                // Update display
+                document.querySelector('.font-size').textContent = `${currentFontSize}px`;
+                
+                // Save to localStorage
+                localStorage.setItem('preferredFontSize', currentFontSize);
+            }
+
+            // Initialize font size on page load
+            window.addEventListener('load', () => {
+                // Set initial font size
+                document.documentElement.style.setProperty('--font-size', `${currentFontSize}px`);
+                document.querySelector('.font-size').textContent = `${currentFontSize}px`;
+                
+                // Add scalable-text class to all text elements
+                document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, blockquote, label, button, input, textarea, .tab-btn, .verse-text, .options label')
+                    .forEach(el => el.classList.add('scalable-text'));
+            });
+
+            function changeFont(fontFamily) {
+                document.body.style.fontFamily = fontFamily;
+                // Save preference
+                localStorage.setItem('preferredFont', fontFamily);
+            }
+
+            // Load saved preferences
+            window.addEventListener('load', () => {
+                const savedFontSize = localStorage.getItem('preferredFontSize');
+                if (savedFontSize) {
+                    currentFontSize = parseInt(savedFontSize);
+                    adjustFontSize(0);
+                }
+                
+                const savedFont = localStorage.getItem('preferredFont');
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    document.querySelector('.font-family-select').value = savedFont;
+                }
+            });
+
+            // Add CSS Variable for scaling
+            document.documentElement.style.setProperty('--content-scale', '100%');
+
+            // Update content elements to use the scale
+            document.querySelectorAll('.tab-content, .memory-verse, .reflection-notes').forEach(el => {
+                el.classList.add('adjustable-content');
+                el.style.fontSize = 'calc(1rem * var(--content-scale) / 100)';
+            });
+        </script>
+    </body>
+</html>
